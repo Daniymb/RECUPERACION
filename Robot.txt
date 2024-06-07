@@ -1,0 +1,52 @@
+package com.example.rsumativaa2;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+import java.util.*;
+
+import java.util.*;
+import java.util.*;
+
+public class RobotMovement {
+    public static void main(String[] args) {
+        int[] steps = {10, 5, -2};
+        int[] finalPosition = calculateFinalPosition(steps);
+        System.out.println("Final coordinates: (x: " + finalPosition[0] + ", y: " + finalPosition[1] + ")");
+    }
+
+    public static int[] calculateFinalPosition(int[] steps) {
+        int x = 0;
+        int y = 0;
+        boolean xAxis = false; // Indicates if the robot moves on the x or y axis
+        boolean positiveDirection = true; // Indicates if the robot moves in positive or negative direction
+
+        for (int step : steps) {
+            if (xAxis) {
+                // Movement on the x-axis
+                if (positiveDirection) {
+                    x += step;
+                } else {
+                    x -= step;
+                }
+            } else {
+                // Movement on the y-axis
+                if (positiveDirection) {
+                    y += step;
+                } else {
+                    y -= step;
+                }
+            }
+
+            // Change of direction and axis
+            positiveDirection = !positiveDirection;
+            xAxis = !xAxis;
+        }
+
+        return new int[]{x, y};
+    }
+}
